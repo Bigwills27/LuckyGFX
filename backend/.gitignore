@@ -1,6 +1,0 @@
-# Backend-specific ignores
-logs/
-scripts/tradingview-fetch.js
-node_modules/
-.env
-*.log

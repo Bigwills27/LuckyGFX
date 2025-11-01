@@ -1,6 +1,5 @@
 # Shared artifacts across repos
 .DS_Store
-images/
 
 # Since backend and frontend are separate repos, ignore their folders if this is a monorepo root
 # Uncomment if needed:
