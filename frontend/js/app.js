@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
       interval,
       hours,
     });
-    window.location.href = `chart.html?${params.toString()}`;
+    window.location.href = `/chart?${params.toString()}`;
   }
 
   function initializeChartPage() {
@@ -872,14 +872,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isLoginPage) {
       return;
     }
-    window.location.href = "login.html";
+    window.location.href = "/login";
   }
 
   function redirectToDashboard() {
-    if (window.location.pathname.endsWith("/dashboard.html")) {
+    if (window.location.pathname === "/dashboard") {
       return;
     }
-    window.location.href = "dashboard.html";
+    window.location.href = "/dashboard";
   }
 
   function handleUnauthorized() {
