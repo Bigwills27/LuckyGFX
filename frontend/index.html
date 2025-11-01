@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuckyGFX Alerts – Smart Trading Signals</title>
+    <link rel="shortcut icon" href="images/Ahmed-agent-logo.svg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            display: block;
+        }
+
+        .landing-shell {
+            min-height: 100vh;
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            background: radial-gradient(circle at top right, #dbe2fa45 0%, transparent 55%), var(--color-background);
+        }
+
+        .landing-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-md);
+        }
+
+        .landing-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-weight: 700;
+            font-size: var(--font-size-h3);
+            color: var(--color-heading);
+        }
+
+        .landing-brand img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--color-accent);
+            background-color: var(--color-accent-soft);
+            padding: 6px;
+            box-shadow: var(--shadow-focus);
+        }
+
+        .landing-main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .landing-copy {
+            max-width: 520px;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .landing-eyebrow {
+            font-size: var(--font-size-small);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+
+        .landing-title {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.15;
+            color: var(--color-heading);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .landing-description {
+            font-size: 1.05rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .landing-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .landing-hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .landing-hero::after {
+            content: "";
+            position: absolute;
+            inset: 10% 8% 0;
+            border-radius: var(--radius-lg);
+            background: #dbe2fa45;
+            filter: blur(60px);
+            z-index: 0;
+        }
+
+        .landing-hero img {
+            position: relative;
+            z-index: 1;
+            max-width: 100%;
+            width: min(520px, 100%);
+            height: auto;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-medium);
+        }
+
+        @media (max-width: 768px) {
+            .landing-shell {
+                padding: var(--space-md);
+            }
+
+            .landing-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+
+            .landing-actions {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body data-page="landing" data-theme="light">
+    <div class="landing-shell">
+        <header class="landing-header">
+            <span class="landing-brand">
+                <img src="images/Ahmed-agent-logo.svg" alt="LuckyGFX logo">
+                LuckyGFX Alerts
+            </span>
+            <a class="btn" href="/login">Log In</a>
+        </header>
+
+        <main class="landing-main">
+            <section class="landing-copy">
+                <span class="landing-eyebrow">Verified candle alerts</span>
+                <h1 class="landing-title">Stay on top of your setups without staring at charts.</h1>
+                <p class="landing-description">
+                    We monitor TradingView for your three priority pairs and only ping when a fully closed candle
+                    confirms your pattern. Friendly WhatsApp nudges arrive every hour, so you act fast and stay in
+                    control.
+                </p>
+                <div class="landing-actions">
+                    <a class="btn" href="/dashboard">Open Dashboard</a>
+                    <a class="btn btn-secondary" href="/help">How it works</a>
+                </div>
+            </section>
+            <figure class="landing-hero" aria-hidden="true">
+                <img src="../images/Sandy_Tech-24_Single-10.svg" alt="Illustration of traders reviewing candle charts">
+            </figure>
+        </main>
+    </div>
+</body>
+
+</html>

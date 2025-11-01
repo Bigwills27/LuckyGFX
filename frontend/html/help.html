@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuckyGFX – Help</title>
+    <link rel="shortcut icon" href="../images/Ahmed-agent-logo.svg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body data-page="help" data-theme="light">
+    <div class="toast-stack" data-toast-stack aria-live="polite" aria-atomic="false"></div>
+    <div class="screen-spinner" data-spinner-overlay aria-hidden="true">
+        <div class="spinner" role="status" aria-label="Loading"></div>
+    </div>
+    <div class="app-shell">
+        <aside class="site-header" role="navigation">
+            <div class="sidebar-top">
+                <div class="brand">
+                    <img class="brand-logo" src="../images/Ahmed-agent-logo.svg" alt="LuckyGFX logo">
+                    <span class="brand-label">LuckyGFX</span>
+                </div>
+                <button class="sidebar-collapse" type="button" data-sidebar-collapse aria-label="Collapse navigation">
+                    <i data-feather="chevron-left"></i>
+                </button>
+            </div>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="dashboard.html" data-page-link="dashboard">
+                    <i data-feather="home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="settings.html" data-page-link="settings">
+                    <i data-feather="settings"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="history.html" data-page-link="history">
+                    <i data-feather="archive"></i>
+                    <span>Alert History</span>
+                </a>
+                <a href="chart.html" data-page-link="chart">
+                    <i data-feather="trending-up"></i>
+                    <span>Charts</span>
+                </a>
+                <a href="help.html" data-page-link="help">
+                    <i data-feather="help-circle"></i>
+                    <span>Help</span>
+                </a>
+            </nav>
+            <div class="header-actions">
+                <button class="header-action" type="button" data-dark-toggle>
+                    <i data-feather="moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+                <a class="logout-link" href="login.html">
+                    <i data-feather="log-out"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+        <main class="main-content">
+            <div class="content-width">
+                <button class="sidebar-mobile-toggle" type="button" data-sidebar-open aria-label="Toggle navigation">
+                    <i data-feather="menu"></i>
+                    <span>Menu</span>
+                </button>
+                <section class="section-medium" aria-labelledby="help-heading">
+                    <h2 id="help-heading" class="section-title section-centered">Help</h2>
+                    <div class="details-list">
+                        <details>
+                            <summary>How does LuckyGFX work?</summary>
+                            <p>LuckyGFX monitors the 1H timeframe for your configured pairs and flags candlestick
+                                patterns that match your strategy guidelines. Each alert is validated by a secondary
+                                confluence, helping you focus on high-quality setups.</p>
+                        </details>
+                        <details>
+                            <summary>What candlestick pattern is tracked?</summary>
+                            <p>The monitored pattern is defined by your strategy admin. For launch, we focus on an
+                                engulfing setup with confirmations such as moving averages, RSI divergence, or pivot
+                                interactions. Pattern adjustments will be exposed once backend configuration is ready.
+                            </p>
+                        </details>
+                        <details>
+                            <summary>How do I troubleshoot missing alerts?</summary>
+                            <p>First confirm your monitoring toggle is active on the dashboard. Ensure your phone
+                                number is up to date in Settings. If the issue persists, capture the pair and timestamp
+                                and share it via the support channel (coming soon).</p>
+                        </details>
+                    </div>
+                    <p class="disclaimer">Information provided is for educational purposes only and does not
+                        constitute financial advice.</p>
+                    <p class="contact-link"><a href="#"
+                            data-placeholder="Support contact options will be published soon.">Contact Support</a></p>
+                </section>
+                <footer class="footer">© 2025 LuckyGFX</footer>
+            </div>
+        </main>
+    </div>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="../js/app.js"></script>
+</body>
+
+</html>

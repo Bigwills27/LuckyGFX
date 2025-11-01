@@ -1,0 +1,8 @@
+# Netlify redirects to mask .html extensions
+/ /index.html 200
+/help /html/help.html 200
+/history /html/history.html 200
+/login /html/login.html 200
+/settings /html/settings.html 200
+/dashboard /html/dashboard.html 200
+/chart /html/chart.html 200

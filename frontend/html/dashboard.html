@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuckyGFX – Dashboard</title>
+    <link rel="shortcut icon" href="../images/Ahmed-agent-logo.svg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body data-page="dashboard" data-theme="light">
+    <div class="toast-stack" data-toast-stack aria-live="polite" aria-atomic="false"></div>
+    <div class="screen-spinner" data-spinner-overlay aria-hidden="true">
+        <div class="spinner" role="status" aria-label="Loading"></div>
+    </div>
+    <div class="app-shell">
+        <aside class="site-header" role="navigation">
+            <div class="sidebar-top">
+                <div class="brand">
+                    <img class="brand-logo" src="../images/Ahmed-agent-logo.svg" alt="LuckyGFX logo">
+                    <span class="brand-label">LuckyGFX</span>
+                </div>
+                <button class="sidebar-collapse" type="button" data-sidebar-collapse aria-label="Collapse navigation">
+                    <i data-feather="chevron-left"></i>
+                </button>
+            </div>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="dashboard.html" data-page-link="dashboard">
+                    <i data-feather="home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="settings.html" data-page-link="settings">
+                    <i data-feather="settings"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="history.html" data-page-link="history">
+                    <i data-feather="archive"></i>
+                    <span>Alert History</span>
+                </a>
+                <a href="chart.html" data-page-link="chart">
+                    <i data-feather="trending-up"></i>
+                    <span>Charts</span>
+                </a>
+                <a href="help.html" data-page-link="help">
+                    <i data-feather="help-circle"></i>
+                    <span>Help</span>
+                </a>
+            </nav>
+            <div class="header-actions">
+                <button class="header-action" type="button" data-dark-toggle>
+                    <i data-feather="moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+                <a class="logout-link" href="login.html">
+                    <i data-feather="log-out"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+        <main class="main-content">
+            <div class="content-width">
+                <button class="sidebar-mobile-toggle" type="button" data-sidebar-open aria-label="Toggle navigation">
+                    <i data-feather="menu"></i>
+                    <span>Menu</span>
+                </button>
+                <section aria-labelledby="monitoring-heading">
+                    <h2 id="monitoring-heading" class="section-title">Monitoring Status</h2>
+                    <p class="section-subtitle">Tracking 1H candlestick confirmations for your priority pairs.</p>
+                    <div class="card-grid">
+                        <article class="card" role="button" tabindex="0" data-chart-symbol="XAUUSD"
+                            data-chart-label="Gold / XAUUSD" data-chart-interval="60"
+                            aria-label="View Gold / XAUUSD chart">
+                            <h3>Gold / XAUUSD</h3>
+                            <div class="status-meta">
+                                <span>Last Close: $2,365.20</span>
+                                <span>Status: Active</span>
+                                <span class="status-indicator"><span class="status-dot"
+                                        aria-hidden="true"></span>Updated 10 min ago</span>
+                            </div>
+                        </article>
+                        <article class="card" role="button" tabindex="0" data-chart-symbol="USDJPY"
+                            data-chart-label="USDJPY" data-chart-interval="60" aria-label="View USDJPY chart">
+                            <h3>USDJPY</h3>
+                            <div class="status-meta">
+                                <span>Last Close: ¥156.42</span>
+                                <span>Status: Awaiting Signal</span>
+                                <span class="status-indicator"><span class="status-dot"
+                                        aria-hidden="true"></span>Updated 6 min ago</span>
+                            </div>
+                        </article>
+                        <article class="card" role="button" tabindex="0" data-chart-symbol="US30"
+                            data-chart-label="US30 / Dow Jones" data-chart-interval="60"
+                            aria-label="View US30 / Dow Jones chart">
+                            <h3>US30 / Dow Jones</h3>
+                            <div class="status-meta">
+                                <span>Last Close: 38,492.15</span>
+                                <span>Status: Active</span>
+                                <span class="status-indicator"><span class="status-dot"
+                                        aria-hidden="true"></span>Updated 3 min ago</span>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="card-stack" role="group" aria-label="Monitoring controls">
+                        <button class="btn monitor-toggle" type="button" data-monitor-symbol="XAUUSD"
+                            data-placeholder="Monitoring controls will connect once the data pipeline is live.">Start
+                            Gold Monitor</button>
+                        <button class="btn monitor-toggle" type="button" data-monitor-symbol="USDJPY"
+                            data-placeholder="Monitoring controls will connect once the data pipeline is live.">Start
+                            USDJPY Monitor</button>
+                        <button class="btn monitor-toggle" type="button" data-monitor-symbol="US30"
+                            data-placeholder="Monitoring controls will connect once the data pipeline is live.">Start
+                            US30 Monitor</button>
+                    </div>
+                </section>
+                <section aria-labelledby="alerts-heading">
+                    <h2 id="alerts-heading" class="section-title">Recent Alerts</h2>
+                    <div class="table-wrapper" role="region" aria-labelledby="alerts-heading">
+                        <table aria-describedby="alerts-heading">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Pair</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Pattern</th>
+                                    <th scope="col">Confluence</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Gold / XAUUSD</td>
+                                    <td>26 Oct 2025 • 12:00</td>
+                                    <td>Engulfing</td>
+                                    <td>200 EMA</td>
+                                </tr>
+                                <tr>
+                                    <td>USDJPY</td>
+                                    <td>26 Oct 2025 • 11:00</td>
+                                    <td>Pin Bar</td>
+                                    <td>RSI Divergence</td>
+                                </tr>
+                                <tr>
+                                    <td>US30</td>
+                                    <td>26 Oct 2025 • 10:00</td>
+                                    <td>Inside Bar</td>
+                                    <td>Pivot S1</td>
+                                </tr>
+                                <tr>
+                                    <td>Gold / XAUUSD</td>
+                                    <td>26 Oct 2025 • 09:00</td>
+                                    <td>Morning Star</td>
+                                    <td>Fib 61.8%</td>
+                                </tr>
+                                <tr>
+                                    <td>USDJPY</td>
+                                    <td>26 Oct 2025 • 08:00</td>
+                                    <td>Hammer</td>
+                                    <td>Trendline Touch</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <footer class="footer">© 2025 LuckyGFX</footer>
+            </div>
+        </main>
+    </div>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="../js/app.js"></script>
+</body>
+
+</html>
