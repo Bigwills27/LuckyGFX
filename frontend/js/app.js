@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ohlcStatus = document.querySelector("[data-ohlc-status]");
   const ohlcPre = document.querySelector("[data-ohlc-pre]");
   const ohlcRefreshButton = document.querySelector("[data-refresh-ohlc]");
+  const checkCandleButton = document.querySelector("[data-check-candle]");
   const mobileQuery = window.matchMedia("(max-width: 900px)");
   const COLLAPSE_KEY = "ahmed-agent-sidebar-collapsed";
   const TOAST_TIMEOUT = 4800;
@@ -99,6 +100,15 @@ document.addEventListener("DOMContentLoaded", () => {
         symbol: chartState.symbol || "XAUUSD",
         timeframe: chartState.interval,
         forceRefresh: true,
+      });
+    });
+  }
+
+  if (checkCandleButton) {
+    checkCandleButton.addEventListener("click", () => {
+      checkCandleSignal({
+        symbol: chartState.symbol || "XAUUSD",
+        timeframe: chartState.interval,
       });
     });
   }
@@ -512,6 +522,117 @@ document.addEventListener("DOMContentLoaded", () => {
           handleUnauthorized();
         } else {
           showToast("Unable to fetch OHLC data. Please try again soon.");
+        }
+        return null;
+      });
+  }
+
+  function checkCandleSignal({ symbol, timeframe } = {}) {
+    if (!isChartPage || !ohlcPre) {
+      return Promise.resolve(null);
+    }
+
+    const targetSymbol = (symbol || chartState.symbol || "XAUUSD")
+      .trim()
+      .toUpperCase();
+    const targetTimeframe = (timeframe || chartState.interval || "60").trim();
+
+    if (ohlcStatus) {
+      ohlcStatus.textContent = "Checking candle signal...";
+    }
+
+    const params = new URLSearchParams({
+      symbol: targetSymbol,
+      timeframe: targetTimeframe,
+    });
+
+    const endpointUrl = new URL("tradingview/check-candle", `${apiRoot}/`);
+    endpointUrl.search = params.toString();
+
+    const headers = {
+      Accept: "application/json",
+    };
+
+    const authHeader = getAuthorizationHeader();
+    if (!authHeader) {
+      handleUnauthorized();
+      return Promise.resolve(null);
+    }
+
+    headers.Authorization = authHeader;
+
+    return fetch(endpointUrl.toString(), { headers })
+      .then(async (response) => {
+        if (!response.ok) {
+          if (response.status === 401) {
+            const unauthorizedError = new Error("Unauthorized");
+            unauthorizedError.status = 401;
+            throw unauthorizedError;
+          }
+          let errorDetail = `Request failed with status ${response.status}`;
+          try {
+            const errorBody = await response.clone().json();
+            if (errorBody && errorBody.error) {
+              errorDetail = errorBody.error;
+            }
+          } catch (parseError) {
+            try {
+              const textBody = await response.text();
+              if (textBody) {
+                errorDetail = textBody;
+              }
+            } catch (_) {
+              // ignore parsing errors
+            }
+          }
+          const error = new Error(errorDetail);
+          error.status = response.status;
+          throw error;
+        }
+        return response.json();
+      })
+      .then((payload) => {
+        if (!payload.success || !payload.data) {
+          throw new Error(payload.error || "No check-candle data returned");
+        }
+
+        const data = payload.data;
+        const pretty = JSON.stringify(data, null, 2);
+        if (ohlcPre) {
+          ohlcPre.textContent = pretty;
+        }
+
+        if (ohlcStatus) {
+          ohlcStatus.textContent = data.message || "Check complete.";
+        }
+
+        const toastMessage = data.valid
+          ? `✅ ${data.pattern} signal detected on ${data.symbol}!`
+          : `No valid signal found on ${data.symbol}.`;
+        showToast(toastMessage);
+
+        if (ohlcSection) {
+          ohlcSection.dataset.lastLoaded = new Date().toISOString();
+        }
+
+        return data;
+      })
+      .catch((error) => {
+        console.error("Unable to check candle signal", error);
+        if (ohlcStatus) {
+          const message =
+            error.message && error.message.trim().length
+              ? error.message
+              : "Unable to check candle signal. Please try again.";
+          ohlcStatus.textContent = message;
+        }
+        if (ohlcPre) {
+          ohlcPre.textContent = error.message || "Unexpected error";
+        }
+        if (error.status === 401) {
+          handleUnauthorized();
+        } else {
+          showToast("Unable to check candle signal. Please try again soon.");
         }
         return null;
       });
