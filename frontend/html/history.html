@@ -37,7 +37,7 @@
                 </a>
                 <a href="/history" data-page-link="history">
                     <i data-feather="archive"></i>
-                    <span>Alert History</span>
+                    <span>Pattern Matches</span>
                 </a>
                 <a href="/chart" data-page-link="chart">
                     <i data-feather="trending-up"></i>
@@ -66,11 +66,15 @@
                     <span>Menu</span>
                 </button>
                 <section class="section-wide" aria-labelledby="history-heading">
-                    <h2 id="history-heading" class="section-title">Alert History</h2>
+                    <h2 id="history-heading" class="section-title">Recent Pattern Matches</h2>
+                    <p class="section-subtitle" style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        <i data-feather="info" style="width: 16px; height: 16px; vertical-align: middle;"></i>
+                        Showing candles that currently match the pattern criteria. This may differ from actual WhatsApp alerts sent.
+                    </p>
                     <div class="form-group form-row-tight">
-                        <label for="history-search" class="visually-hidden">Search alerts</label>
-                        <input id="history-search" type="search" placeholder="Search by pair or date"
-                            aria-label="Search alerts by pair or date">
+                        <label for="history-search" class="visually-hidden">Search patterns</label>
+                        <input id="history-search" type="search" placeholder="Search by pair or pattern"
+                            aria-label="Search patterns by pair or type">
                     </div>
                     <div class="table-wrapper" role="region" aria-labelledby="history-heading">
                         <table aria-describedby="history-heading">
@@ -79,91 +83,27 @@
                                     <th scope="col">Date / Time</th>
                                     <th scope="col">Pair</th>
                                     <th scope="col">Pattern</th>
-                                    <th scope="col">Confluence</th>
-                                    <th scope="col">Price</th>
+                                    <th scope="col">SMA (9)</th>
+                                    <th scope="col">Close Price</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>26 Oct 2025 • 12:00</td>
-                                    <td>Gold / XAUUSD</td>
-                                    <td>Engulfing</td>
-                                    <td>200 EMA</td>
-                                    <td>$2,365.20</td>
-                                </tr>
-                                <tr>
-                                    <td>26 Oct 2025 • 11:00</td>
-                                    <td>USDJPY</td>
-                                    <td>Pin Bar</td>
-                                    <td>RSI Divergence</td>
-                                    <td>¥156.42</td>
-                                </tr>
-                                <tr>
-                                    <td>26 Oct 2025 • 10:00</td>
-                                    <td>US30 / Dow Jones</td>
-                                    <td>Inside Bar</td>
-                                    <td>Pivot S1</td>
-                                    <td>38,492.15</td>
-                                </tr>
-                                <tr>
-                                    <td>25 Oct 2025 • 18:00</td>
-                                    <td>Gold / XAUUSD</td>
-                                    <td>Morning Star</td>
-                                    <td>Fib 61.8%</td>
-                                    <td>$2,352.00</td>
-                                </tr>
-                                <tr>
-                                    <td>25 Oct 2025 • 16:00</td>
-                                    <td>USDJPY</td>
-                                    <td>Hammer</td>
-                                    <td>Trendline Touch</td>
-                                    <td>¥155.90</td>
-                                </tr>
-                                <tr>
-                                    <td>25 Oct 2025 • 14:00</td>
-                                    <td>US30 / Dow Jones</td>
-                                    <td>Doji</td>
-                                    <td>VWAP</td>
-                                    <td>38,210.80</td>
-                                </tr>
-                                <tr>
-                                    <td>25 Oct 2025 • 12:00</td>
-                                    <td>Gold / XAUUSD</td>
-                                    <td>Engulfing</td>
-                                    <td>Supply Zone</td>
-                                    <td>$2,340.10</td>
-                                </tr>
-                                <tr>
-                                    <td>25 Oct 2025 • 10:00</td>
-                                    <td>USDJPY</td>
-                                    <td>Inside Bar</td>
-                                    <td>200 EMA</td>
-                                    <td>¥155.42</td>
-                                </tr>
-                                <tr>
-                                    <td>24 Oct 2025 • 18:00</td>
-                                    <td>US30 / Dow Jones</td>
-                                    <td>Engulfing</td>
-                                    <td>RSI Divergence</td>
-                                    <td>37,980.40</td>
-                                </tr>
-                                <tr>
-                                    <td>24 Oct 2025 • 16:00</td>
-                                    <td>Gold / XAUUSD</td>
-                                    <td>Pin Bar</td>
-                                    <td>Pivot R1</td>
-                                    <td>$2,328.75</td>
+                            <tbody data-history-table>
+                                <tr data-loading-row>
+                                    <td colspan="5" style="text-align: center; padding: 2rem;">
+                                        <div class="spinner" role="status" aria-label="Loading matches"></div>
+                                        <p style="margin-top: 1rem; color: var(--text-secondary);">Loading recent pattern matches...</p>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="pagination">
+                    <div class="pagination" style="display: none;">
                         <button type="button" class="btn btn-secondary"
                             data-placeholder="Pagination will load more results once connected to the API.">Prev</button>
                         <button type="button" class="btn"
                             data-placeholder="Pagination will load more results once connected to the API.">Next</button>
                     </div>
-                    <div class="centered-actions">
+                    <div class="centered-actions" style="display: none;">
                         <button type="button" class="btn" data-export>Export CSV</button>
                     </div>
                 </section>

@@ -1103,6 +1103,106 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
+  // History page: Load recent pattern matches
+  const isHistoryPage = pageId === "history";
+  if (isHistoryPage) {
+    loadRecentMatches();
+  }
+
+  async function loadRecentMatches() {
+    const tableBody = document.querySelector("[data-history-table]");
+    if (!tableBody) return;
+
+    try {
+      const response = await fetch(`${apiRoot}/tradingview/recent-matches?limit=15`, {
+        headers: {
+          Authorization: `Basic ${authState}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const result = await response.json();
+      
+      if (!result.success || !result.data || !result.data.matches) {
+        throw new Error("Invalid response format");
+      }
+
+      const matches = result.data.matches;
+
+      // Clear loading row
+      tableBody.innerHTML = "";
+
+      if (matches.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+              No pattern matches found in recent candles.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      // Populate table with matches
+      matches.forEach((match) => {
+        const row = document.createElement("tr");
+        
+        // Format timestamp
+        const date = new Date(match.timestamp);
+        const formattedDate = date.toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        });
+        const formattedTime = date.toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        });
+        const dateTime = `${formattedDate} • ${formattedTime}`;
+
+        // Format symbol display
+        let displaySymbol = match.symbol;
+        if (match.symbol === "XAUUSD") displaySymbol = "Gold / XAUUSD";
+        else if (match.symbol === "US30") displaySymbol = "US30 / Dow Jones";
+        else if (match.symbol === "SPX500") displaySymbol = "SPX500 / S&P 500";
+
+        // Format price with currency symbol
+        let formattedPrice = match.price.toFixed(2);
+        if (match.symbol === "XAUUSD") formattedPrice = `$${formattedPrice}`;
+        else if (match.symbol === "USDJPY") formattedPrice = `¥${formattedPrice}`;
+        else formattedPrice = formattedPrice;
+
+        // Format SMA
+        const formattedSMA = match.sma ? match.sma.toFixed(2) : "N/A";
+
+        row.innerHTML = `
+          <td>${dateTime}</td>
+          <td>${displaySymbol}</td>
+          <td>${match.pattern}</td>
+          <td>${formattedSMA}</td>
+          <td>${formattedPrice}</td>
+        `;
+
+        tableBody.appendChild(row);
+      });
+
+    } catch (error) {
+      console.error("Failed to load recent matches:", error);
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="5" style="text-align: center; padding: 2rem; color: var(--error);">
+            Failed to load pattern matches. ${error.message}
+          </td>
+        </tr>
+      `;
+      showToast("Failed to load pattern matches", "error");
+    }
+  }
+
   // Expose helpers for debugging if needed
   window.AhmedAgentUI = {
     showToast,
