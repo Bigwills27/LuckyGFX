@@ -1114,18 +1114,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!tableBody) return;
 
     try {
-      const response = await fetch(`${apiRoot}/tradingview/recent-matches?limit=15`, {
-        headers: {
-          Authorization: `Basic ${authState}`,
-        },
-      });
+      const response = await fetch(
+        `${apiRoot}/tradingview/recent-matches?limit=15`,
+        {
+          headers: {
+            Authorization: `Basic ${authState.encoded}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
 
       const result = await response.json();
-      
+
       if (!result.success || !result.data || !result.data.matches) {
         throw new Error("Invalid response format");
       }
@@ -1149,7 +1152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Populate table with matches
       matches.forEach((match) => {
         const row = document.createElement("tr");
-        
+
         // Format timestamp
         const date = new Date(match.timestamp);
         const formattedDate = date.toLocaleDateString("en-GB", {
@@ -1173,7 +1176,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Format price with currency symbol
         let formattedPrice = match.price.toFixed(2);
         if (match.symbol === "XAUUSD") formattedPrice = `$${formattedPrice}`;
-        else if (match.symbol === "USDJPY") formattedPrice = `¥${formattedPrice}`;
+        else if (match.symbol === "USDJPY")
+          formattedPrice = `¥${formattedPrice}`;
         else formattedPrice = formattedPrice;
 
         // Format SMA
@@ -1189,7 +1193,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         tableBody.appendChild(row);
       });
-
     } catch (error) {
       console.error("Failed to load recent matches:", error);
       tableBody.innerHTML = `
